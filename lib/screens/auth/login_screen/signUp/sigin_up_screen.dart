@@ -24,6 +24,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             child: ListView(
           children: [
             Column(
+              mainAxisSize:MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -39,12 +40,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 SizedBox(
                   height: 40,
                 ),
-                Container(
-                  height: 700,
+                AnimatedContainer(
+                  duration: Duration (milliseconds: 100),
+
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                       color: Colors.white),
                   width: double.infinity,
+
                   child: Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Column(
@@ -54,7 +57,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           height: 30,
                         ),
 
-                          
+
 
                         Text(
                           selectTab == 1
@@ -73,7 +76,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           alignment: Alignment.center,
                           child: Text(
                             selectTab == 1
-                                ? "No obligations,unsubscribe anytime"
+                                ? "No obligations,unsubscribe anytime \n"
                                 : "There is no obligation, you can cancel at any time. Register now for teachers at douroosi",
                             style:
                                 TextStyle(fontSize: 14, color: Colors.black54),
@@ -85,11 +88,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         Container(
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10)),
-                          height: 40,
+                          height: 50,
                           child: Row(
                             children: [
                               Expanded(
                                   child: InkWell(
+                                    splashColor: Colors.amber,
                                 onTap: () {
                                   selectTab = 1;
                                    _expanded = false;
@@ -118,29 +122,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               )),
                               Expanded(
                                   child: InkWell(
+                                    splashColor: Colors.amber,
                                 onTap: () {
                                   selectTab = 0;
                                   _expanded = true;
                                   setState(() {});
                                 },
                                 child: Container(
-                                    decoration: BoxDecoration(
+                                  decoration: BoxDecoration(
+                                      color: selectTab == 0
+                                          ? KtabselectedColor1
+                                          : KtabUnselectedColor1,
+                                      borderRadius: BorderRadius.only(
+                                          bottomRight: Radius.circular(10),
+                                          topRight: Radius.circular(10))),
+                                  child: Center(
+                                      child: Text(
+                                    'Tutor'.toUpperCase(),
+                                    style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold,
                                         color: selectTab == 0
-                                            ? KtabselectedColor1
-                                            : KtabUnselectedColor1,
-                                        borderRadius: BorderRadius.only(
-                                            bottomRight: Radius.circular(10),
-                                            topRight: Radius.circular(10))),
-                                    child: Center(
-                                        child: Text(
-                                      'Tutor'.toUpperCase(),
-                                      style: TextStyle(
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.bold,
-                                          color: selectTab == 0
-                                              ? KtabColor1
-                                              : Colors.black45),
-                                    ))),
+                                            ? KtabColor1
+                                            : Colors.black45),
+                                  )),
+                                ),
                               ))
                             ],
                           ),

@@ -1,6 +1,7 @@
 import 'package:douroosi/constans/constans.dart';
 import 'package:douroosi/screens/auth/login_screen/login/componts/custom_button.dart';
 import 'package:douroosi/screens/auth/login_screen/signUp/componts/socialSignUp.dart';
+import 'package:douroosi/screens/home/home_screen.dart';
 import 'package:douroosi/widget/fade_translate.dart';
 import 'package:douroosi/widget/text_field.dart';
 import 'package:flutter/cupertino.dart';
@@ -25,10 +26,11 @@ class SignUpStudant extends StatelessWidget {
         SizedBox(
           height: 15,
         ),
-        ExpandedSection(
-          _isExpanded,
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 2),
+        AnimatedContainer(
+
+          duration: const Duration(milliseconds: 100),
+          child:selcteeType==1?null: Container(
+            key: UniqueKey(),
             child: Column(
               children: [
                 MyTextField("Topics"),
@@ -38,25 +40,48 @@ class SignUpStudant extends StatelessWidget {
               ],
             ),
           ),
-        ),
-        CoustomButton("Get Started", Colors.white, KUnEnabledColor),
-        Center(
-          child: ExpandedSection(
-              _isExpanded,
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text("Pause with Comma",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.black54,
-                      ))
-                ],
-              )),
-        ),
+        )
+        // ExpandedSection(
+        //   _isExpanded,
+        //   Padding(
+        //     padding: const EdgeInsets.symmetric(horizontal: 2),
+        //     child: Column(
+        //       children: [
+        //         MyTextField("Topics"),
+        //         SizedBox(
+        //           height: 10,
+        //         )
+        //       ],
+        //     ),
+        //   ),
+        // ),
+        ,InkWell(
+          splashColor: Colors.black12,
+            onTap: (){
+
+              Navigator.of(context).pushReplacementNamed(HomePage.ID);
+            },
+
+            child: CoustomButton("Get Started", Colors.white, KUnEnabledColor)),
+        AnimatedContainer( duration: const Duration(milliseconds: 100),
+        child:selcteeType==1?null:
+        Container(
+          key: UniqueKey(),
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 10,
+                ),
+                Text("Pause with Comma",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.black54,
+                    ))
+              ],
+            ),
+        ),),
         SizedBox(
           height: 15,
         ),

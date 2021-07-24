@@ -21,67 +21,41 @@ class _TestingFlutterState extends State<TestingFlutter> with SingleTickerProvid
       controller.forward();
     }
 
-    bool isSelected = false;
+  bool loading = true;
 
     Widget build(BuildContext context) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          AnimatedSwitcher(
-            duration: Duration(seconds: 10),//it is ignored
-            child: isSelected
-                ? Container(
-                    width: 200.0,
-                    height: 200.0,
-                    child: FlutterLogo(
-                      textColor: Colors.red,
-                    ),
-                  )
-                : Container(
-                    width: 200.0,
-                    height: 200.0,
-                    child: FlutterLogo(
-                      textColor: Colors.blue,
-                    )),
-            transitionBuilder: defaultTransitionBuilder,
-          ),
-          MaterialButton(
-            child: Text("Texting"),
-            onPressed: () {
-              if (controller.isCompleted) {
-                controller.reset();
-              }
-
-              controller.forward();
-
-              setState(() {
-                isSelected = !isSelected;
-              });
-            },
-          )
-        ],
-      );
-    }
-
-    Widget defaultTransitionBuilder(Widget child, Animation<double> animation) {
-      return AnimatedBuilder(
-        animation: controller,
-        builder: (context, widget) {
-          return Opacity(
-            opacity: controllerAnimation.value,
-            child: ScaleTransition(
-              scale: controllerAnimation,
-              child: widget,
+      return Scaffold(
+        body: AnimatedSwitcher(
+          duration: Duration(milliseconds: 300),
+          child: loading ? Container(
+            key: UniqueKey(),
+            color: Theme.of(context).scaffoldBackgroundColor,
+            child: Center(
+              child: SizedBox(
+                width: 24,
+                height: 24,
+                child: GestureDetector(
+                  onTap: _toggle,
+                  child: CircularProgressIndicator(),
+                ),
+              ),
             ),
-          );
-        },
-        child: child,
+          ) : Container(
+            key: UniqueKey(),
+            child: Center(
+              child: GestureDetector(
+                onTap: _toggle,
+                child: Text("WELCOME"),
+              ),
+            ),
+          ),
+        ),
       );
     }
 
-    dispose() {
-      controller.dispose();
-      super.dispose();
-    }
+  _toggle() {
+    setState(() {
+      loading = !loading;
+    });
   }
+}

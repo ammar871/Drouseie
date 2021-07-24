@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
          '/home':(context) => HomePage(),
          '/login':(context) => LoginScreen(),
          '/signUp':(context) => SignUpScreen(),
+        HomePage.ID:(context) => HomePage(),
         //  '/test':(context) => TestingFlutter()
 
       },
